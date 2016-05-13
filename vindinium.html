@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vindinium</title>
+</head>
+<style>
+    h1{
+        text-align:center;
+        font-family:'Ceviche One', cursive;
+        font-size:90px;
+        border:20px ridge green;
+        color:blue; 
+        background:black;
+        
+    }
+    body{
+        background-image:url(http://i.imgur.com/avu3JfU.gif);
+    }
+    h2{
+        text-align:center;
+        font-family:'Ceviche One', cursive;
+        border:10px ridge green;
+        font-size:25px;
+        color:blue;  
+        background:black;
+    }
+    
+    h3{
+          text-align:center;
+        font-family:'Ceviche One', cursive;
+        border:10px ridge green;
+        font-size:35px;
+        color:blue;  
+        background:black; 
+    }
+    
+    h4{
+        text-align:center;
+        font-family:'Ceviche One', cursive;
+        border:10px ridge green;
+        font-size:25px;
+        color:blue;  
+        background:black; 
+    }
+    h5{
+          text-align:center;
+        font-family:'Ceviche One', cursive;
+        border:10px ridge green;
+        font-size:25px;
+        color:blue;  
+        background:black; 
+    }
+    h6{
+          text-align:center;
+        font-family:'Ceviche One', cursive;
+        border:10px ridge green;
+        font-size:25px;
+        color:blue;  
+        background:black; 
+    }
+    h7{
+      text-align:center;
+        font-family:'Ceviche One', cursive;
+        border:10px ridge green;
+        font-size:25px;
+        color:blue;  
+        background:black;    
+    }
+</style>
+
+<body>
+<h1>Vindinium Page</h1> 
+<h2>vindinium is a game where you program a robot to do certain things like attack a person with mor emines and when they have certain amount of life they go to a taverns.` </h2>
+<h3> This Is The Code I Used To Program My Bot</h3>
+<h4>
+    
+    <code> <pre>
+var Bot = require('bot');
+var PF = require('pathfinding');
+//var bot = new Bot('wl7h9ts8', 'training', 'http://vindinium.org'); //Put your bot's code here and change training to Arena when you want to fight others.
+var bot = new Bot('wl7h9ts8', 'arena', 'http://52.53.211.7:9000'); //Put your bot's code here and change training to Arena when you want to fight others.
+var goDir;
+var Promise = require('bluebird');
+Bot.prototype.botBrain = function() {
+    return new Promise(function(resolve, reject) {
+        _this = bot;
+        //////* Write your bot below Here *//////
+        //////* Set `myDir` in the direction you want to go and then bot.goDir is set to myDir at the bottom *////////
+
+        /*                                      *
+         * This Code is global data!            *
+         *                                      */
+
+        // Set myDir to what you want and it will set bot.goDir to that direction at the end.  Unless it is "none"
+        var myDir;
+        var myPos = [bot.yourBot.pos.x, bot.yourBot.pos.y];
+
+        var enemyBots = [];
+        if(bot.yourBot.id != 1) enemyBots.push(bot.bot1);
+        if(bot.yourBot.id != 2) enemyBots.push(bot.bot2);
+        if(bot.yourBot.id != 3) enemyBots.push(bot.bot3);
+        if(bot.yourBot.id != 4) enemyBots.push(bot.bot4);
+        
+        var mostMines = enemyBots[0];
+        for(i = 0; i < enemyBots.length; i++){
+            if(mostMines.mineCount < enemyBots[i].mineCount){
+                mostMines = enemyBots[i]
+            }
+        }
+
+
+        /*                                      *
+         * This Code Decides WHAT to do         *
+         *                                      */
+        var task;
+        if(bot.yourBot.life < 25){
+            task = "bot.taverns";
+        }else if(mostMines.mineCount > 4){
+            task = "mostMines";
+        }else{
+        task = "freemines";
+        }
+
+
+        /*                                      *
+         * This Code Determines HOW to do it    *
+         *                                      */
+
+        // This Code find the nearest freemine and sets myDir toward that direction //
+        if(task === "freemines") {
+            var closestMine = bot.freeMines[0];
+            for(i = 0; i < bot.freeMines.length; i++) {
+                if(bot.findDistance(myPos, closestMine) > bot.findDistance(myPos, bot.freeMines[i])) {
+                    closestMine = bot.freeMines[i];
+                }
+            }
+            console.log("Claiming a Free Mine!");
+            myDir = bot.findPath(myPos, closestMine);
+        }
+ 
+        if(task === "bot.taverns") {
+            var closestTavern = bot.taverns[0];
+            for(i = 0; i < bot.taverns.length; i++) {
+                if(bot.findDistance(myPos, closestTavern) > bot.findDistance(myPos, bot.taverns[i])) {
+                    closestTavern = bot.taverns[i];
+                }
+            }
+            console.log("Got Health");
+            myDir = bot.findPath(myPos, closestTavern);
+        }
+        
+        if(task === "mostMines"){
+            console.log("scrub");
+            myDir = bot.findPath(myPos, mostMines.posArray);
+        }
+        
+        /*                                                                                                                              *
+         * This Code Sets your direction based on myDir.  If you are trying to go to a place that you can't reach, you move randomly.   *
+         * Otherwise you move in the direction set by your code.  Feel free to change this code if you want.                            */
+        if(myDir === "none") {
+            console.log("Going Random!");
+            var rand = Math.floor(Math.random() * 4);
+            var dirs = ["north", "south", "east", "west"];
+            bot.goDir = dirs[rand];
+        } else {
+            bot.goDir = myDir;
+        }
+
+
+
+        ///////////* DON'T REMOVE ANTYTHING BELOW THIS LINE *//////////////
+        resolve();
+    });
+}
+bot.runGame();
+</h4>    
+    <h5>so my bot does only 2 thing and its goes ot taverns and it attacks the bot with most mines but i only did 2 because my bot was doing very good with too so i wanted to keep like that</h5>
+    
+    </pre></code>
+    <h6>My Results</h6>
+    <h7>My bot did every thing i asked it to do. It was difficult at times because my codes were not correct so i would have to do it all over again.</h7>
+
+        
+    
+</body>
+</html>

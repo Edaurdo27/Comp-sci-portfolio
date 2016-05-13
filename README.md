@@ -1,26 +1,35 @@
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+##Things to Finish
+
+#Vindinium
+Bot attacking low health person
+Website with information
+
+#Interval 1
+Finish CSS Portion of HTML/CSS Page
+Write an essay format worklog for each page
+- one or two paragraphs per page
+
+#Interval 2
+Do TodoList
+Write an essay format worklog for each page 
+- one or two paragraphs per page
 
 
-Hi there! Welcome to Cloud9 IDE!
 
-To get you started, we included a small hello world application.
+#Interval 3
+Fill out Plan and Reflect in Planning doc
 
-1) Open the hello-world.html file
+-------------------------------
 
-2) Click on the Preview button to open a live preview pane
+#wed
+Bot attacking low health person
+Comments on code done
+Begin Setting up website
 
-3) Make some changes to the file, save, watch the preview, and have fun!
+#thurs
+Try to finish website
 
-Happy coding!
-The Cloud9 IDE team
-
-
-## Support & Documentation
-
-Visit http://docs.c9.io for documentation, or http://support.c9.io for support.
-To watch some training videos, visit http://www.youtube.com/user/c9ide
+#Fri
+Finish website if not done
+Finish CSS Portion of HTML/CSS Page
+Begin/Finish paragraphs for worklog
